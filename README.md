@@ -1,43 +1,58 @@
 # Alpha Automation Research Toolkit
 
-This repository contains a sanitized research automation toolkit for building,
-validating, scheduling, and monitoring WorldQuant Brain-style alpha experiments.
-
-The public release intentionally excludes:
-
-- account credentials, tokens, cookies, SSH keys, and server addresses
-- personal documents, resumes, competition papers, and private notes
-- simulation results, alpha IDs, platform state caches, and submission history
-- downloaded research PDFs, forum dumps, and reference repositories
+Alpha Automation Research Toolkit is a Python-based workflow for automated
+alpha research. It focuses on generating candidate expressions, validating
+templates, scheduling batch simulations, tracking experiment outcomes, and
+closing the loop between feedback and the next search round.
 
 ## Main Components
 
 - `brain_client.py`  
-  API client and alpha submission/check utilities. Credentials are read only
-  from environment variables or an external credentials file.
+  API client and alpha submission/check utilities.
 
 - `script/continuous_slot_miner.py`  
-  Continuous multi-slot experiment scheduler.
+  Continuous multi-slot scheduler for long-running simulation queues.
 
 - `script/continuous_supply_engine.py`  
-  Candidate supply engine for generating and queuing alpha variants.
+  Candidate supply engine for generating and prioritizing experiment jobs.
 
 - `script/raw_alpha_rotation.py` and `script/raw_alpha_builder.py`  
-  Raw alpha family rotation, diversity checks, and seed expansion.
+  Raw alpha family construction, diversity control, and seed expansion.
 
 - `script/high_grade_repair_engine.py`  
-  Bounded repair engine for high-grade failed candidates.
+  Repair workflow for promising candidates that fail submission checks.
 
 - `script/mobile_dashboard.py`  
-  Local/mobile dashboard for observing runtime status. Set
-  `DASHBOARD_PASSWORD` before exposing it on any network.
+  Lightweight dashboard for monitoring channels, throughput, queues, and
+  candidate status from a phone or browser.
 
 - `alpha_generation/templates/`  
-  Example alpha templates and template library.
+  Example templates and reusable expression patterns.
+
+## Workflow
+
+1. Define or import raw alpha ideas.
+2. Expand ideas into structured candidate templates.
+3. Validate expression syntax and field compatibility.
+4. Schedule simulations across available channels.
+5. Parse results and submission checks.
+6. Feed performance, failure reasons, and family information back into the
+   next generation round.
+
+## Features
+
+- template validation and lightweight expression parsing
+- raw alpha family rotation and diversity governance
+- continuous simulation scheduling
+- result classification and tag synchronization helpers
+- high-grade candidate repair workflow
+- mobile-friendly runtime dashboard
+- research-source ingestion and field-selection utilities
 
 ## Credential Setup
 
-Do not commit credentials.
+Credentials should be supplied through environment variables or an external
+credentials file.
 
 Use environment variables:
 
@@ -60,10 +75,8 @@ The credentials file format is:
 
 Keep this file outside the repository.
 
-## Safety Notes
+## Notes
 
-This repository is a sanitized code release. It does not include the private
-runtime state required to reproduce the original experiments. Before running
-against any external platform, review the platform terms, rate limits, and
-credential handling requirements.
-
+Before running large batches, review the target platform's terms, API behavior,
+and rate limits. The toolkit is designed to support controlled experimentation,
+not uncontrolled request bursts.

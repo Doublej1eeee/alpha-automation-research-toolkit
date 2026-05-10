@@ -1,0 +1,244 @@
+name: cloud_slot_miner
+continue_on_error: true
+cycle_sleep_seconds: 120
+
+adaptive_rate_limit:
+  enabled: false
+  window_minutes: 15
+  medium_429_count: 80
+  high_429_count: 200
+  medium_active_job_slots: 3
+  high_active_job_slots: 3
+  low_worker_cap: 1
+  medium_worker_cap: 1
+  high_worker_cap: 1
+  medium_cycle_sleep_seconds: 60
+  high_cycle_sleep_seconds: 120
+
+slot_miner:
+  name: cloud_slot_miner
+  max_slots: 3
+  repair_active_slot_limit: 1
+  min_pool_size: 1
+  attempted_fingerprint_limit: 1200
+  attempted_key_limit: 2400
+  stale_submit_recovery_minutes: 30
+  refill_sleep_seconds: 5
+  supply_refresh_seconds: 600
+  sync_platform_color: true
+  check_retries: 6
+  check_retry_delay_seconds: 20
+  mechanism_rotation_enabled: true
+  mechanism_rotation_order:
+    - narrative_valuation_gap
+    - event_novelty_underreaction
+    - systematic_risk_regime_shift
+    - footnote_accounting_complexity
+    - credit_recovery_pressure
+    - mna_price_impact_absorption
+    - balance_sheet_pressure
+    - liquidity_microstructure_shock
+    - promotion_dispersion_mismatch
+    - instability_fragility_leadlag
+    - attention_revision_congestion
+  slot_plan:
+    - explore
+    - exploit
+    - explore
+    - exploit
+    - explore
+    - exploit
+
+supply:
+  enabled: true
+  max_variants_per_job: 34
+  max_pair_variants_per_job: 14
+  max_jobs_per_cycle: 240
+  active_jobs_per_cycle: 9
+  active_job_slots: 3
+  exploit_enabled: true
+  max_exploit_sources: 18
+  max_exploit_variants_per_source: 3
+  max_self_improvement_variants_per_source: 4
+  max_lateral_variants_per_source: 2
+  max_mutation_variants_per_source: 2
+  max_crossover_variants_per_source: 1
+  hybrid_breaker_enabled: true
+  max_hybrid_sources: 3
+  max_hybrid_variants_per_source: 1
+  max_hybrid_peers_per_source: 3
+  min_exploit_score: 0.4
+  hopeful_enabled: false
+  max_hopeful_sources: 0
+  high_grade_repair:
+    enabled: true
+    max_sources: 10
+    max_variants_per_source: 8
+    max_jobs: 32
+    min_jobs: 12
+    max_share: 0.25
+    frontload_enabled: true
+    frontload_jobs: 12
+    frontload_max_share: 0.25
+    prioritize_successful_repairs: true
+    max_continuation_sources: 6
+    max_continuation_variants_per_source: 2
+    min_continuation_jobs: 4
+    frontload_continuation_jobs: 4
+    max_continuation_share: 0.08
+    hybrid_breaker_enabled: true
+    max_hybrid_sources: 2
+    max_hybrid_variants_per_source: 1
+    max_hybrid_peers_per_source: 3
+    min_hybrid_source_score: 0.0
+  research_novelty_mode:
+    enabled: true
+    field_cluster_job_cap: 34
+    expression_signature_job_cap: 22
+    raw_family_job_cap: 44
+    mechanism_job_cap: 52
+    expression_family_job_cap: 38
+    source_lineage_job_cap: 6
+    max_exploit_share: 0.18
+    strict_fill_ratio: 0.82
+    min_distinct_field_clusters: 6
+    raw_family_requirements:
+      enabled: true
+      min_jobs_for_gate: 12
+      min_expression_signatures: 4
+      max_top_expression_signature_share: 0.35
+      min_field_clusters: 3
+      max_top_field_cluster_share: 0.55
+      min_settings_clusters: 3
+      max_top_settings_cluster_share: 0.55
+  generation_policy:
+    family_job_cap: 8
+    elite_family_bonus_cap: 3
+    retire_degrading_streak: 3
+    retire_max_top_reward: 1.2
+    reactivate_health_score: 0.72
+    reactivate_top_reward: 1.8
+    min_pair_jobs: 30
+    min_lateral_jobs: 4
+    min_mutation_jobs: 3
+    min_crossover_jobs: 1
+    lineage_soft_job_cap: 45
+
+raw_alpha_rotation:
+  enabled: true
+  replace_static_jobs: true
+  disable_ordinary_exploit: true
+  source_file: alpha_generation/raw_alpha_ai.md
+  mechanism_bank_file: alpha_generation/research_mechanism_bank.yaml
+  rotation_hours: 48
+  min_completed_before_switch: 3000
+  max_completed_before_switch: 8000
+  high_grade_bonus_completed_before_switch: 10000
+  recent_quality_window: 1500
+  small_pool_min_slot_count: 3
+  small_pool_completed_floor: 600
+  active_families_per_window: 1
+  inventory_stale_after_minutes: 240
+  inventory_fetch_limit_per_slot: 1400
+  selection_limit_per_slot: 260
+  min_selection_score_per_slot: 1.25
+  supply_fetch_limit: 3200
+  supply_selection_limit: 1400
+  max_datasets: 12
+  per_dataset_limit: 260
+  max_pair_field_maps: 1600
+  inventory_reuse_min_remaining: 260
+  selection_limit: 520
+  min_selection_score: 1.25
+  top: 18
+  supply_neutralization_variants:
+    - INDUSTRY
+    - SUBINDUSTRY
+
+jobs:
+  - name: analyst_level_round
+    inventory_name: analyst_level_round
+    refresh_inventory: true
+    inventory_stale_after_minutes: 240
+    template: alpha_generation/templates/analyst_level_rank_template.yaml
+    category: analyst
+    limit: 900
+    inventory_fetch_limit: 1800
+    supply_fetch_limit: 2400
+    supply_selection_limit: 900
+    discover_datasets: true
+    dataset_categories: analyst,fundamental,model
+    max_datasets: 14
+    per_dataset_limit: 320
+    max_pair_field_maps: 900
+    supply_neutralization_variants:
+      - INDUSTRY
+      - SUBINDUSTRY
+    supply_delay_variants:
+      - 1
+    inventory_reuse_min_remaining: 380
+    selection_query: earnings revision momentum analyst ranking
+    selection_limit: 900
+    min_selection_score: 1.8
+    max_workers: 1
+    top: 15
+    check_retries: 0
+    fast_local_only: true
+
+  - name: sentiment_round
+    inventory_name: sentiment_round
+    refresh_inventory: true
+    inventory_stale_after_minutes: 240
+    template: alpha_generation/templates/night_sentiment_momentum_d4_template.yaml
+    category: sentiment
+    limit: 1000
+    inventory_fetch_limit: 2200
+    supply_fetch_limit: 3000
+    supply_selection_limit: 1200
+    discover_datasets: true
+    dataset_categories: sentiment,news,analyst,model
+    max_datasets: 18
+    per_dataset_limit: 360
+    max_pair_field_maps: 1200
+    supply_neutralization_variants:
+      - INDUSTRY
+      - SUBINDUSTRY
+    supply_delay_variants:
+      - 1
+    inventory_reuse_min_remaining: 420
+    selection_query: persistent news sentiment underreaction
+    selection_limit: 1200
+    min_selection_score: 1.5
+    max_workers: 1
+    top: 15
+    check_retries: 0
+    fast_local_only: true
+
+  - name: ts_rank_round
+    inventory_name: ts_rank_round
+    refresh_inventory: true
+    inventory_stale_after_minutes: 240
+    template: alpha_generation/templates/official_ts_rank_252_template.yaml
+    category: fundamental
+    limit: 1200
+    inventory_fetch_limit: 2400
+    supply_fetch_limit: 3200
+    supply_selection_limit: 1400
+    discover_datasets: true
+    dataset_categories: fundamental,model,analyst
+    max_datasets: 16
+    per_dataset_limit: 360
+    max_pair_field_maps: 1200
+    supply_neutralization_variants:
+      - SUBINDUSTRY
+      - INDUSTRY
+    supply_delay_variants:
+      - 1
+    inventory_reuse_min_remaining: 520
+    selection_query: slow moving fundamental quality valuation signal
+    selection_limit: 1400
+    min_selection_score: 1.5
+    max_workers: 1
+    top: 15
+    check_retries: 0
+    fast_local_only: true

@@ -1,0 +1,31 @@
+name: "tpl_official_neg_ts_std_dev_10_{{FIELD_SLUG}}"
+type: REGULAR
+category: SENTIMENT
+tags:
+  - 模板
+  - 官方教程
+  - 单字段
+  - 稳定性
+  - "{{FIELD}}"
+color: yellow
+description: |
+  官方短期稳定性模板。
+  来源：Alpha Examples for Beginners / Short-Term Sentiment Volume Stability。
+  适合“波动越大越差，越稳定越好”的字段。
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 0
+  neutralization: INDUSTRY
+  truncation: 0.08
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: OFF
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+expression: |
+  -ts_std_dev({{FIELD}}, 10)

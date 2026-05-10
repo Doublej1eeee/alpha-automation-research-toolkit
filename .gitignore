@@ -1,0 +1,35 @@
+__pycache__/
+*/__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.env
+
+# Credentials and secrets
+brain_credentials.json
+**/brain_credentials.json
+*credential*
+*credentials*
+*secret*
+*token*
+*cookie*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Runtime data and generated artifacts
+result_store/
+memory/learning_sources/
+temp/
+logs/
+*.log
+*.jsonl
+
+# Personal documents and research PDFs
+resume/
+简历/
+references/
+*.docx
+*.pdf

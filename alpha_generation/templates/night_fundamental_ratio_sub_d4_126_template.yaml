@@ -1,0 +1,30 @@
+name: "night_fund_ratio_sub_d4_126_{{FIELD_SLUG}}"
+type: REGULAR
+category: FUNDAMENTAL
+tags:
+  - night_search
+  - fundamental
+  - ratio_to_close
+  - tuned
+  - "{{FIELD}}"
+color: blue
+description: |
+  Tuned low-crowding fundamental ratio alpha. Use a longer ranking window and slightly
+  lower decay to improve signal strength while keeping subindustry-relative structure.
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 4
+  neutralization: SUBINDUSTRY
+  truncation: 0.05
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: ON
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+expression: |
+  group_rank(ts_rank({{FIELD}} / close, 126), subindustry)

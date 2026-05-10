@@ -1,0 +1,31 @@
+name: "tpl_official_neg_ts_rank_126_{{FIELD_SLUG}}"
+type: REGULAR
+category: FUNDAMENTAL
+tags:
+  - 模板
+  - 官方教程
+  - 单字段
+  - 反转
+  - "{{FIELD}}"
+color: yellow
+description: |
+  官方单字段反向时间序列排名模板。
+  来源：Alpha Examples for Beginners / Appreciation of liabilities。
+  适合“字段上升意味着利空，需要做空”的场景。
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 0
+  neutralization: SUBINDUSTRY
+  truncation: 0.08
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: OFF
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+expression: |
+  -ts_rank({{FIELD}}, 126)

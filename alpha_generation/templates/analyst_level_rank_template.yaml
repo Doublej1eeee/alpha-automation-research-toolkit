@@ -1,0 +1,36 @@
+name: "tpl_analyst_level_rank_{{FIELD_SLUG}}"
+type: REGULAR
+category: ANALYST
+tags:
+  - 模板
+  - 批量生成
+  - analyst
+  - "{{FIELD}}"
+color: blue
+description: |
+  模板生成的 alpha。
+  直接对 analyst 数值字段做时间序列排序，再在行业内横截面比较。
+
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 0
+  neutralization: INDUSTRY
+  truncation: 0.08
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: ON
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+field_selection:
+  dataset_hint: analyst
+  blocked_types:
+    - EVENT
+  prefer_low_usage: true
+
+expression: |
+  group_rank(ts_rank({{FIELD}}, 60), industry)

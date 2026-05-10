@@ -1,0 +1,29 @@
+name: "night_fund_ratio_sub_d6_{{FIELD_SLUG}}"
+type: REGULAR
+category: FUNDAMENTAL
+tags:
+  - night_search
+  - fundamental
+  - ratio_to_close
+  - "{{FIELD}}"
+color: blue
+description: |
+  Low-crowding fundamental ratio alpha. Normalize a sparse fundamental field by close,
+  apply a short-medium time-series ranking, and compare inside subindustry.
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 6
+  neutralization: SUBINDUSTRY
+  truncation: 0.05
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: ON
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+expression: |
+  group_rank(ts_rank({{FIELD}} / close, 60), subindustry)

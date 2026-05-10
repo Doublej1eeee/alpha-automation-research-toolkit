@@ -1,0 +1,36 @@
+name: "tpl_official_ts_rank_252_{{FIELD_SLUG}}"
+type: REGULAR
+category: FUNDAMENTAL
+tags:
+  - 模板
+  - 官方教程
+  - 单字段
+  - "{{FIELD}}"
+color: yellow
+description: |
+  官方单字段时间序列排名模板。
+  来源：Alpha Examples for Beginners / Operating Earnings Yield。
+  适合“当前值相对自身过去一年位置”的字段。
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 0
+  neutralization: SUBINDUSTRY
+  truncation: 0.08
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: OFF
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+field_selection:
+  dataset_hint: fundamental
+  blocked_types:
+    - EVENT
+  prefer_low_usage: true
+
+expression: |
+  ts_rank({{FIELD}}, 252)

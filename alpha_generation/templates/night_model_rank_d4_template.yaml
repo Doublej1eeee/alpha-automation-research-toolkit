@@ -1,0 +1,29 @@
+name: "night_model_rank_d4_{{FIELD_SLUG}}"
+type: REGULAR
+category: RELATION
+tags:
+  - night_search
+  - model
+  - low_crowding
+  - "{{FIELD}}"
+color: blue
+description: |
+  Low-crowding model-score trend alpha. Apply time-series ranking to a stable model field
+  and compare names inside subindustry with modest decay to reduce turnover.
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 4
+  neutralization: SUBINDUSTRY
+  truncation: 0.05
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: ON
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+expression: |
+  group_rank(ts_rank({{FIELD}}, 126), subindustry)

@@ -1,0 +1,36 @@
+name: "night_sent_mom_d4_{{FIELD_SLUG}}"
+type: REGULAR
+category: SENTIMENT
+tags:
+  - night_search
+  - sentiment
+  - momentum
+  - "{{FIELD}}"
+color: blue
+description: |
+  News and sentiment persistence alpha. Smooth recent sentiment observations and compare
+  names inside industry to capture underreaction to continuing positive or negative tone.
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 4
+  neutralization: INDUSTRY
+  truncation: 0.05
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: ON
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+field_selection:
+  dataset_hint: sentiment
+  subcategory_hint: sentiment
+  blocked_types:
+    - EVENT
+  prefer_low_usage: true
+
+expression: |
+  group_rank(ts_mean(ts_backfill({{FIELD}}, 20), 5), industry)

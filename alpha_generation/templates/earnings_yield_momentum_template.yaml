@@ -1,0 +1,29 @@
+name: "tpl_earnings_yield_{{FIELD_SLUG}}"
+type: REGULAR
+category: ANALYST
+tags:
+  - 模板
+  - 批量生成
+  - "{{FIELD}}"
+color: blue
+description: |
+  模板生成的 alpha。
+  使用字段 {{FIELD}} 构造收益率/价格类相对强弱信号。
+
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 0
+  neutralization: INDUSTRY
+  truncation: 0.08
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: ON
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+expression: |
+  group_rank(ts_rank({{FIELD}} / close, 60), industry)

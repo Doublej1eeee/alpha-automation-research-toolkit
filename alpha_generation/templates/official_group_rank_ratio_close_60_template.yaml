@@ -1,0 +1,31 @@
+name: "tpl_official_group_rank_ratio_close_60_{{FIELD_SLUG}}"
+type: REGULAR
+category: FUNDAMENTAL
+tags:
+  - 模板
+  - 官方教程
+  - 单字段
+  - 价格归一化
+  - "{{FIELD}}"
+color: yellow
+description: |
+  官方“字段/价格 + 时间序列比较 + 行业内横截面比较”模板。
+  来源：Alpha Examples for Beginners / Earnings Yield Momentum。
+  适合可以与价格组成相对估值或相对收益率含义的字段。
+settings:
+  instrumentType: EQUITY
+  region: USA
+  universe: TOP3000
+  delay: 1
+  decay: 0
+  neutralization: INDUSTRY
+  truncation: 0.08
+  pasteurization: ON
+  unitHandling: VERIFY
+  nanHandling: ON
+  testPeriod: P1Y
+  language: FASTEXPR
+  visualization: false
+
+expression: |
+  group_rank(ts_rank({{FIELD}} / close, 60), industry)
